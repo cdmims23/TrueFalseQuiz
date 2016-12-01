@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     var indexOfSelectedQuestion: Int = 0
     
     var gameSound: SystemSoundID = 0
+    var correctSound: SystemSoundID = 0
+    var wrongSound: SystemSoundID = 0
     
     let quiz = QuizModel()
     
@@ -77,9 +79,14 @@ class ViewController: UIViewController {
         
         if sender.title(for: .normal) == quiz.quizQuestions[indexOfSelectedQuestion].correctAnswer {
             sender.backgroundColor = UIColor(red: 127/255.0, green: 255/255.0, blue: 0/255.0, alpha: 1.0)
+            loadCorrectSounds()
+            playCorrectSound()
             correctQuestions += 1
+            
         } else {
-             sender.backgroundColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
+            loadWrongSound()
+            playWrongSound()
+            sender.backgroundColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
         }
         
      
@@ -134,6 +141,28 @@ class ViewController: UIViewController {
         let pathToSoundFile = Bundle.main.path(forResource: "GameSound", ofType: "wav")
         let soundURL = URL(fileURLWithPath: pathToSoundFile!)
         AudioServicesCreateSystemSoundID(soundURL as CFURL, &gameSound)
+    }
+    
+    func loadCorrectSounds() {
+        let pathToCorrectSoundFile = Bundle.main.path(forResource: "CorrectAnswer", ofType: "mp3")
+        let correctURL = URL(fileURLWithPath: pathToCorrectSoundFile!)
+        AudioServicesCreateSystemSoundID(correctURL as CFURL, &correctSound)
+        
+    }
+    
+    func loadWrongSound() {
+        let pathToWrongSoundFile = Bundle.main.path(forResource: "WrongAnswer", ofType: "mp3")
+        let wrongURL = URL(fileURLWithPath: pathToWrongSoundFile!)
+        AudioServicesCreateSystemSoundID(wrongURL as CFURL, &wrongSound)
+        
+    }
+    
+    func playWrongSound() {
+        AudioServicesPlaySystemSound(wrongSound)
+    }
+    
+    func playCorrectSound() {
+        AudioServicesPlaySystemSound(correctSound)
     }
     
     func playGameStartSound() {
