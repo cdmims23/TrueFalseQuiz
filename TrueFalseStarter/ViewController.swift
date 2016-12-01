@@ -12,19 +12,14 @@ import AudioToolbox
 
 class ViewController: UIViewController {
     
-    let questionsPerRound = 4
+    let questionsPerRound = 5
     var questionsAsked = 0
     var correctQuestions = 0
     var indexOfSelectedQuestion: Int = 0
     
     var gameSound: SystemSoundID = 0
     
-    let trivia: [[String : String]] = [
-        ["Question": "Only female koalas can whistle", "Answer": "False"],
-        ["Question": "Blue whales are technically whales", "Answer": "True"],
-        ["Question": "Camels are cannibalistic", "Answer": "False"],
-        ["Question": "All ducks are birds", "Answer": "True"]
-    ]
+    let quiz = QuizModel()
     
     @IBOutlet weak var questionField: UILabel!
     @IBOutlet weak var trueButton: UIButton!
@@ -48,9 +43,17 @@ class ViewController: UIViewController {
     }
     
     func displayQuestion() {
-        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: trivia.count)
-        let questionDictionary = trivia[indexOfSelectedQuestion]
-        questionField.text = questionDictionary["Question"]
+        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: quiz.quizQuestions.count)
+        questionField.text = quiz.quizQuestions[indexOfSelectedQuestion].question
+
+        trueButton.setTitle(quiz.quizQuestions[indexOfSelectedQuestion].possibleAnswers[0], for: .normal)
+        falseButton.setTitle(quiz.quizQuestions[indexOfSelectedQuestion].possibleAnswers[1], for: .normal)
+        questionThree.setTitle(quiz.quizQuestions[indexOfSelectedQuestion].possibleAnswers[2], for: .normal)
+        if quiz.quizQuestions[indexOfSelectedQuestion].possibleAnswers.count == 4 {
+            questionFour.setTitle(quiz.quizQuestions[indexOfSelectedQuestion].possibleAnswers[3], for: .normal)
+        } else{
+           questionFour.isHidden = true
+        }
         playAgainButton.isHidden = true
     }
     
@@ -58,6 +61,8 @@ class ViewController: UIViewController {
         // Hide the answer buttons
         trueButton.isHidden = true
         falseButton.isHidden = true
+        questionThree.isHidden = true
+        questionFour.isHidden = true
         
         // Display play again button
         playAgainButton.isHidden = false
@@ -66,20 +71,18 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func checkAnswer(_ sender: UIButton) {
+       @IBAction func checkAnswer(_ sender: UIButton) {
         // Increment the questions asked counter
         questionsAsked += 1
         
-        let selectedQuestionDict = trivia[indexOfSelectedQuestion]
-        let correctAnswer = selectedQuestionDict["Answer"]
-        
-        if (sender === trueButton &&  correctAnswer == "True") || (sender === falseButton && correctAnswer == "False") {
+        if sender.title(for: .normal) == quiz.quizQuestions[indexOfSelectedQuestion].correctAnswer {
+            sender.backgroundColor = UIColor(red: 127/255.0, green: 255/255.0, blue: 0/255.0, alpha: 1.0)
             correctQuestions += 1
-            questionField.text = "Correct!"
         } else {
-            questionField.text = "Sorry, wrong answer!"
+             sender.backgroundColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
         }
         
+     
         loadNextRoundWithDelay(seconds: 2)
     }
     
@@ -89,6 +92,10 @@ class ViewController: UIViewController {
             displayScore()
         } else {
             // Continue game
+            trueButton.backgroundColor = UIColor(red: 12/255.0, green: 121/255.0, blue: 150/255.0, alpha: 1.0)
+            falseButton.backgroundColor = UIColor(red: 12/255.0, green: 121/255.0, blue: 150/255.0, alpha: 1.0)
+            questionThree.backgroundColor = UIColor(red: 12/255.0, green: 121/255.0, blue: 150/255.0, alpha: 1.0)
+            questionFour.backgroundColor = UIColor(red: 12/255.0, green: 121/255.0, blue: 150/255.0, alpha: 1.0)
             displayQuestion()
         }
     }
@@ -97,10 +104,14 @@ class ViewController: UIViewController {
         // Show the answer buttons
         trueButton.isHidden = false
         falseButton.isHidden = false
+        questionThree.isHidden = false
+        questionFour.isHidden = false
         
         questionsAsked = 0
         correctQuestions = 0
+        
         nextRound()
+        
     }
     
 
