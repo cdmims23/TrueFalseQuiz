@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     var wrongSound: SystemSoundID = 0
     
     //Quiz Object
-    let quiz = QuizModel()
+    var quiz = QuizModel()
     
     @IBOutlet weak var notificationLabel: UILabel!
     @IBOutlet weak var questionField: UILabel!
@@ -81,21 +81,18 @@ class ViewController: UIViewController {
         questionsAsked += 1
         
         if sender.title(for: .normal) == quiz.quizQuestions[indexOfSelectedQuestion].correctAnswer {
-            sender.backgroundColor = UIColor(red: 127/255.0, green: 255/255.0, blue: 0/255.0, alpha: 1.0)
+            quiz.correctAnswer(label: sender, notificationLabel: notificationLabel)
             loadCorrectSounds()
             playCorrectSound()
-            notificationLabel.textColor = UIColor(red: 127/255.0, green: 255/255.0, blue: 0/255.0, alpha: 1.0)
-            notificationLabel.text = "Correct"
-            notificationLabel.isHidden = false
             correctQuestions += 1
+            quiz.removeQuestion(index: indexOfSelectedQuestion)
+
             
         } else {
+            quiz.wrongAnswer(label: sender, notificationLabel: notificationLabel)
             loadWrongSound()
             playWrongSound()
-            sender.backgroundColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
-            notificationLabel.textColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
-            notificationLabel.text = "Incorrect"
-            notificationLabel.isHidden = false
+            quiz.removeQuestion(index: indexOfSelectedQuestion)
         }
         
      
@@ -108,20 +105,14 @@ class ViewController: UIViewController {
             displayScore()
         } else {
             // Continue game and set buttons color back to normal
-            trueButton.backgroundColor = UIColor(red: 12/255.0, green: 121/255.0, blue: 150/255.0, alpha: 1.0)
-            falseButton.backgroundColor = UIColor(red: 12/255.0, green: 121/255.0, blue: 150/255.0, alpha: 1.0)
-            questionThree.backgroundColor = UIColor(red: 12/255.0, green: 121/255.0, blue: 150/255.0, alpha: 1.0)
-            questionFour.backgroundColor = UIColor(red: 12/255.0, green: 121/255.0, blue: 150/255.0, alpha: 1.0)
+            quiz.normalButtonColor(firstButton: trueButton, secondButton: falseButton, thirdButton: questionThree, fourthButton: questionFour)
             displayQuestion()
         }
     }
     
     @IBAction func playAgain() {
         // Show the answer buttons
-        trueButton.isHidden = false
-        falseButton.isHidden = false
-        questionThree.isHidden = false
-        questionFour.isHidden = false
+       quiz.playAgain(firstButton: trueButton, secondButton: falseButton, thirdButton: questionThree, fourthButton: questionFour)
         
         questionsAsked = 0
         correctQuestions = 0
