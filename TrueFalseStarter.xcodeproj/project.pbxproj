@@ -13,8 +13,8 @@
 		97093D431C913506001275BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97093D421C913506001275BC /* Assets.xcassets */; };
 		97093D461C913506001275BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97093D441C913506001275BC /* LaunchScreen.storyboard */; };
 		97093D531C932116001275BC /* GameSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 97093D521C932116001275BC /* GameSound.wav */; };
-		C0D1AD461DEFB1FA00D3F9EE /* CorrectAnswer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0D1AD451DEFB1FA00D3F9EE /* CorrectAnswer.mp3 */; };
-		C0D1AD481DEFB21700D3F9EE /* WrongAnswer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0D1AD471DEFB21700D3F9EE /* WrongAnswer.mp3 */; };
+		C0938CC71DF21FB1005A9E82 /* CorrectAnswer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0938CC61DF21FB1005A9E82 /* CorrectAnswer.mp3 */; };
+		C0938CC91DF21FC7005A9E82 /* WrongAnswer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C0938CC81DF21FC7005A9E82 /* WrongAnswer.mp3 */; };
 		C0E144451DEF558A00044D89 /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E144441DEF558A00044D89 /* QuestionModel.swift */; };
 		C0E144471DEF7FFC00044D89 /* QuizModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E144461DEF7FFC00044D89 /* QuizModel.swift */; };
 /* End PBXBuildFile section */
@@ -28,8 +28,8 @@
 		97093D451C913506001275BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97093D471C913506001275BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97093D521C932116001275BC /* GameSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GameSound.wav; sourceTree = "<group>"; };
-		C0D1AD451DEFB1FA00D3F9EE /* CorrectAnswer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CorrectAnswer.mp3; path = "../../../Music/iTunes/iTunes Media/Music/Unknown Artist/Unknown Album/CorrectAnswer.mp3"; sourceTree = "<group>"; };
-		C0D1AD471DEFB21700D3F9EE /* WrongAnswer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = WrongAnswer.mp3; path = "../../../Music/iTunes/iTunes Media/Music/Unknown Artist/Unknown Album/WrongAnswer.mp3"; sourceTree = "<group>"; };
+		C0938CC61DF21FB1005A9E82 /* CorrectAnswer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CorrectAnswer.mp3; path = "../../Music/iTunes/iTunes Media/Music/Unknown Artist/Unknown Album/CorrectAnswer.mp3"; sourceTree = "<group>"; };
+		C0938CC81DF21FC7005A9E82 /* WrongAnswer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = WrongAnswer.mp3; path = "../../Music/iTunes/iTunes Media/Music/Unknown Artist/Unknown Album/WrongAnswer.mp3"; sourceTree = "<group>"; };
 		C0E144441DEF558A00044D89 /* QuestionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
 		C0E144461DEF7FFC00044D89 /* QuizModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -48,6 +48,8 @@
 		97093D2F1C913506001275BC = {
 			isa = PBXGroup;
 			children = (
+				C0938CC81DF21FC7005A9E82 /* WrongAnswer.mp3 */,
+				C0938CC61DF21FB1005A9E82 /* CorrectAnswer.mp3 */,
 				97093D3A1C913506001275BC /* TrueFalseStarter */,
 				97093D391C913506001275BC /* Products */,
 			);
@@ -72,8 +74,6 @@
 				97093D421C913506001275BC /* Assets.xcassets */,
 				97093D441C913506001275BC /* LaunchScreen.storyboard */,
 				97093D471C913506001275BC /* Info.plist */,
-				C0D1AD451DEFB1FA00D3F9EE /* CorrectAnswer.mp3 */,
-				C0D1AD471DEFB21700D3F9EE /* WrongAnswer.mp3 */,
 				97093D521C932116001275BC /* GameSound.wav */,
 			);
 			path = TrueFalseStarter;
@@ -139,9 +139,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0D1AD481DEFB21700D3F9EE /* WrongAnswer.mp3 in Resources */,
+				C0938CC91DF21FC7005A9E82 /* WrongAnswer.mp3 in Resources */,
 				97093D531C932116001275BC /* GameSound.wav in Resources */,
-				C0D1AD461DEFB1FA00D3F9EE /* CorrectAnswer.mp3 in Resources */,
+				C0938CC71DF21FB1005A9E82 /* CorrectAnswer.mp3 in Resources */,
 				97093D461C913506001275BC /* LaunchScreen.storyboard in Resources */,
 				97093D431C913506001275BC /* Assets.xcassets in Resources */,
 				97093D411C913506001275BC /* Main.storyboard in Resources */,
