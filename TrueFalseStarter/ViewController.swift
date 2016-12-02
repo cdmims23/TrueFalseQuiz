@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var questionThree: UIButton!
     @IBOutlet weak var questionFour: UIButton!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadGameStartSound()
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         playGameStartSound()
         displayQuestion()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
     func displayQuestion() {
         indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: quiz.quizQuestions.count)
         questionField.text = quiz.quizQuestions[indexOfSelectedQuestion].question
-
+        
         //Show Answer Buttons
         trueButton.setTitle(quiz.quizQuestions[indexOfSelectedQuestion].possibleAnswers[0], for: .normal)
         falseButton.setTitle(quiz.quizQuestions[indexOfSelectedQuestion].possibleAnswers[1], for: .normal)
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
         
     }
     
-       @IBAction func checkAnswer(_ sender: UIButton) {
+    @IBAction func checkAnswer(_ sender: UIButton) {
         // Increment the questions asked counter
         questionsAsked += 1
         
@@ -86,7 +86,6 @@ class ViewController: UIViewController {
             playCorrectSound()
             correctQuestions += 1
             quiz.removeQuestion(index: indexOfSelectedQuestion)
-
             
         } else {
             quiz.wrongAnswer(label: sender, notificationLabel: notificationLabel)
@@ -95,7 +94,6 @@ class ViewController: UIViewController {
             quiz.removeQuestion(index: indexOfSelectedQuestion)
         }
         
-     
         loadNextRoundWithDelay(seconds: 2)
     }
     
@@ -112,7 +110,7 @@ class ViewController: UIViewController {
     
     @IBAction func playAgain() {
         // Show the answer buttons
-       quiz.playAgain(firstButton: trueButton, secondButton: falseButton, thirdButton: questionThree, fourthButton: questionFour)
+        quiz.playAgain(firstButton: trueButton, secondButton: falseButton, thirdButton: questionThree, fourthButton: questionFour)
         
         questionsAsked = 0
         correctQuestions = 0
@@ -121,7 +119,7 @@ class ViewController: UIViewController {
         
     }
     
-
+    
     
     // MARK: Helper Methods
     
@@ -169,4 +167,3 @@ class ViewController: UIViewController {
         AudioServicesPlaySystemSound(gameSound)
     }
 }
-
