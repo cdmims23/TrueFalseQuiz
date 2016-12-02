@@ -13,11 +13,7 @@ struct Question {
     let correctAnswer: String
     let possibleAnswers: [String]
     
-    func showCorrectAnswer() -> String {
-        return correctAnswer
-    }
-    
-}
+ }
 
 
 

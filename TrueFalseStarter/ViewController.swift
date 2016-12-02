@@ -17,12 +17,15 @@ class ViewController: UIViewController {
     var correctQuestions = 0
     var indexOfSelectedQuestion: Int = 0
     
+    //Game Sound ID's
     var gameSound: SystemSoundID = 0
     var correctSound: SystemSoundID = 0
     var wrongSound: SystemSoundID = 0
     
+    //Quiz Object
     let quiz = QuizModel()
     
+    @IBOutlet weak var notificationLabel: UILabel!
     @IBOutlet weak var questionField: UILabel!
     @IBOutlet weak var trueButton: UIButton!
     @IBOutlet weak var falseButton: UIButton!
@@ -48,15 +51,14 @@ class ViewController: UIViewController {
         indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: quiz.quizQuestions.count)
         questionField.text = quiz.quizQuestions[indexOfSelectedQuestion].question
 
+        //Show Answer Buttons
         trueButton.setTitle(quiz.quizQuestions[indexOfSelectedQuestion].possibleAnswers[0], for: .normal)
         falseButton.setTitle(quiz.quizQuestions[indexOfSelectedQuestion].possibleAnswers[1], for: .normal)
         questionThree.setTitle(quiz.quizQuestions[indexOfSelectedQuestion].possibleAnswers[2], for: .normal)
-        if quiz.quizQuestions[indexOfSelectedQuestion].possibleAnswers.count == 4 {
-            questionFour.setTitle(quiz.quizQuestions[indexOfSelectedQuestion].possibleAnswers[3], for: .normal)
-        } else{
-           questionFour.isHidden = true
-        }
+        questionFour.setTitle(quiz.quizQuestions[indexOfSelectedQuestion].possibleAnswers[3], for: .normal)
+        
         playAgainButton.isHidden = true
+        notificationLabel.isHidden = true
     }
     
     func displayScore() {
@@ -65,11 +67,12 @@ class ViewController: UIViewController {
         falseButton.isHidden = true
         questionThree.isHidden = true
         questionFour.isHidden = true
+        notificationLabel.isHidden = true
         
         // Display play again button
         playAgainButton.isHidden = false
         
-        questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
+        questionField.text = "You got \(correctQuestions) out of \(questionsPerRound) correct!"
         
     }
     
@@ -81,12 +84,18 @@ class ViewController: UIViewController {
             sender.backgroundColor = UIColor(red: 127/255.0, green: 255/255.0, blue: 0/255.0, alpha: 1.0)
             loadCorrectSounds()
             playCorrectSound()
+            notificationLabel.textColor = UIColor(red: 127/255.0, green: 255/255.0, blue: 0/255.0, alpha: 1.0)
+            notificationLabel.text = "Correct"
+            notificationLabel.isHidden = false
             correctQuestions += 1
             
         } else {
             loadWrongSound()
             playWrongSound()
             sender.backgroundColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
+            notificationLabel.textColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
+            notificationLabel.text = "Incorrect"
+            notificationLabel.isHidden = false
         }
         
      
@@ -98,7 +107,7 @@ class ViewController: UIViewController {
             // Game is over
             displayScore()
         } else {
-            // Continue game
+            // Continue game and set buttons color back to normal
             trueButton.backgroundColor = UIColor(red: 12/255.0, green: 121/255.0, blue: 150/255.0, alpha: 1.0)
             falseButton.backgroundColor = UIColor(red: 12/255.0, green: 121/255.0, blue: 150/255.0, alpha: 1.0)
             questionThree.backgroundColor = UIColor(red: 12/255.0, green: 121/255.0, blue: 150/255.0, alpha: 1.0)
